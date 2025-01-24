@@ -10,8 +10,8 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-4 text-[14.5px] text-neutral-700">
           <Links />
         </ul>
+        <div className="flex items-center gap-3"></div>
       </div>
     </nav>
   );
 }
-
