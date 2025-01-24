@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <Navbar />
-        <main className='min-h-screen '>{children}</main>
+        <main className="min-h-screen pt-[40px]">{children}</main>
       </body>
     </html>
   );
