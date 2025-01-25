@@ -14,7 +14,7 @@ export default function Search() {
           type="search"
           name="search"
           placeholder="Search..."
-          className="hidden md:inline w-[300px]"
+          className=" w-[300px]"
         />
       </form>
     </div>

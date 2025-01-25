@@ -3,6 +3,7 @@ import Logo from './Logo';
 import Links from './Links';
 import Search from './Search';
 import Cart from './Cart';
+import Menu from './Menu';
 
 export default function Navbar() {
   return (
@@ -13,8 +14,11 @@ export default function Navbar() {
           <Links />
         </ul>
         <div className="flex items-center gap-3">
-          <Search />
+          <div className="hidden md:inline">
+            <Search />
+          </div>
           <Cart />
+          <Menu />
         </div>
       </div>
     </nav>
