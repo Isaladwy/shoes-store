@@ -1,6 +1,6 @@
 import { urlFor } from '@/sanity/lib/image';
 import { sanity } from '@/sanity/lib/sanity';
-import { Product } from '@/types/product';
+import { Product } from '@/types/Product';
 
 export default async function getMainProduct() {
   const query = `*[_type=='main_product'][0]{product->}`;
