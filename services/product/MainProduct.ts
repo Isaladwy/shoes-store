@@ -10,6 +10,14 @@ export default async function getMainProduct() {
   return prepareProduct(mainProduct.product);
 }
 
+export async function getLatestProducts() {
+  const query = `*[_type=="product"][0...6]|order(_createdAt_desc)`;
+
+  const products = (await sanity.fetch(query)) as [];
+
+  return products.map(product=>prepareProduct(product))
+}
+
 function prepareProduct(product: Product) {
   return { ...product, image: urlFor(product.image).url() } as Product;
 }
