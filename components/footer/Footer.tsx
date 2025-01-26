@@ -8,7 +8,7 @@ import { MdMailOutline } from 'react-icons/md';
 
 export default function Footer() {
   return (
-    <div className=" md:grid md:grid-cols-4 flex flex-col gap-4 border-t border-primary/10 py-12 items-start">
+    <div className="px-3 md:grid md:grid-cols-4 flex flex-col gap-4 border-t border-primary/10 py-12 items-start">
       <Logo />
       <div className="space-y-4">
         <span className="font-semibold text-xl ">Links</span>
