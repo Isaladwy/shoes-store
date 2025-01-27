@@ -15,7 +15,13 @@ export async function getLatestProducts() {
 
   const products = (await sanity.fetch(query)) as [];
 
-  return products.map(product=>prepareProduct(product))
+  return products.map((product) => prepareProduct(product));
+}
+
+export async function getProduct(id: string) {
+  const query = `*[_type=="product" && _id=="${id}"][0]`;
+  const product = await sanity.fetch(query);
+  return prepareProduct(product);
 }
 
 function prepareProduct(product: Product) {
