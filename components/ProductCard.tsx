@@ -6,13 +6,16 @@ import { TbShoppingBagPlus } from 'react-icons/tb';
 
 type Props = {
   product: Product;
+  small?: boolean;
 };
 
 export default function ProductCard(props: Props) {
-  const { product } = props;
+  const { product, small } = props;
   return (
     <Link href={`/product/${product._id}`} className="space-y-3 group">
-      <div className="group relative w-full h-[400px] flex justify-center items-center bg-secondary">
+      <div
+        className={`group relative w-full ${small ? 'h-[200px]' : 'h-[400px]'} flex justify-center items-center bg-secondary`}
+      >
         <TbShoppingBagPlus className="absolute right-8 top-8 opacity-0 transition-all group-hover:opacity-100 z-[1] text-xl" />
         <Image
           src={product.image}

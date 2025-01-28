@@ -3,6 +3,7 @@ import { Product } from '@/types/Product';
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 import ProductCard from './ProductCard';
+import Autoplay from 'embla-carousel-autoplay';
 
 export default function ProductCarousel({
   relatedProducts,
@@ -10,11 +11,11 @@ export default function ProductCarousel({
   relatedProducts: Product[];
 }) {
   return (
-    <Carousel>
+    <Carousel plugins={[Autoplay({ delay: 1000 })]}>
       <CarouselContent>
         {relatedProducts.map((product) => (
           <CarouselItem key={product._id} className="md:basis-1/3 basis-1/2">
-            <ProductCard product={product} />
+            <ProductCard small product={product} />
           </CarouselItem>
         ))}
       </CarouselContent>
