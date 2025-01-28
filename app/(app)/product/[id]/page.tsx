@@ -1,17 +1,23 @@
+import ProductCarousel from '@/components/ProductCarousel';
 import { Button } from '@/components/ui/button';
-import { getProduct } from '@/services/product/MainProduct';
+import { getProduct, getRelatedProducts } from '@/services/product/MainProduct';
 import Image from 'next/image';
 import React from 'react';
 
-interface Params {
-  params: {
-    id: string;
-  };
-}
+export default async function Page({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  // const product = await getProduct(id);
+  // const relatedProducts = await getRelatedProducts(id);
+  // console.log(product);
 
-export default async function Page({ params: { id } }: Params) {
-  const product = await getProduct(id);
-  console.log(product);
+  // To await both functions at the same time
+  const [product, relatedProducts] = await Promise.all([
+    getProduct(id),
+    getRelatedProducts(id),
+  ]);
   return (
     <div className="md:grid grid-cols-2 md:h-screen w-full">
       <div className="relative md:h-full h-[400px] w-full flex justify-center items-center">
@@ -43,13 +49,13 @@ export default async function Page({ params: { id } }: Params) {
             >
               Add to cart
             </Button>
-            <Button
-              size="lg"
-              className="text-[17px] py-8 w-full"
-            >
+            <Button size="lg" className="text-[17px] py-8 w-full">
               Buy now
             </Button>
           </div>
+        </div>
+        <div className="border-t border-zinc-200">
+          <ProductCarousel relatedProducts={relatedProducts} />
         </div>
       </div>
     </div>

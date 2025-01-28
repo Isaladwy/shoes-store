@@ -24,6 +24,12 @@ export async function getProduct(id: string) {
   return prepareProduct(product);
 }
 
+export async function getRelatedProducts(id: string) {
+  const query = `*[_type=="product" && id!="${id}"]`;
+  const products = (await sanity.fetch(query)) as [];
+  return products.map((product) => prepareProduct(product));
+}
+
 function prepareProduct(product: Product) {
   return { ...product, image: urlFor(product.image).url() } as Product;
 }
