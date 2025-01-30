@@ -11,7 +11,7 @@ export default function ProductCarousel({
   relatedProducts: Product[];
 }) {
   return (
-    <Carousel plugins={[Autoplay({ delay: 1000 })]}>
+    <Carousel plugins={[Autoplay({ delay: 1000, stopOnInteraction: true })]}>
       <CarouselContent>
         {relatedProducts.map((product) => (
           <CarouselItem key={product._id} className="md:basis-1/3 basis-1/2">
