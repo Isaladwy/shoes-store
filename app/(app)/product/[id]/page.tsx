@@ -1,8 +1,8 @@
 import ProductCarousel from '@/components/ProductCarousel';
-import { Button } from '@/components/ui/button';
 import { getProduct, getRelatedProducts } from '@/services/product/MainProduct';
 import Image from 'next/image';
 import React from 'react';
+import Buttons from './Buttons';
 
 export default async function Page({
   params: { id },
@@ -42,17 +42,7 @@ export default async function Page({
           >
             {product.price}$
           </span>
-          <div className="flex">
-            <Button
-              size="lg"
-              className="text-[17px] py-8 w-full bg-white hover:bg-zinc-100 border shadow-none text-zinc-700"
-            >
-              Add to cart
-            </Button>
-            <Button size="lg" className="text-[17px] py-8 w-full">
-              Buy now
-            </Button>
-          </div>
+          <Buttons product={product}/>
         </div>
         <div className="border-t border-zinc-200">
           <ProductCarousel relatedProducts={relatedProducts} />
