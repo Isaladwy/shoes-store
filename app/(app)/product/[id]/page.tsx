@@ -4,14 +4,10 @@ import Image from 'next/image';
 import React from 'react';
 import Buttons from './Buttons';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
+export type paramsType = Promise<{ id: string }>;
 
-export default async function Page({ params }: PageProps) {
-  const { id } = params;
+export default async function Page(props: { params: paramsType }) {
+  const { id } = await props.params;
 
   // To await both functions at the same time
   const [product, relatedProducts] = await Promise.all([
