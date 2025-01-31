@@ -20,6 +20,7 @@ export default async function Page({ params: { id } }: PageProps) {
     getProduct(id),
     getRelatedProducts(id),
   ]);
+
   return (
     <div className="md:grid grid-cols-2 md:h-screen w-full">
       <div className="relative md:h-full h-[400px] w-full flex justify-center items-center">
