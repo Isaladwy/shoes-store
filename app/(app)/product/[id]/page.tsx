@@ -8,7 +8,8 @@ interface PageProps {
   params: { id: string } | Promise<{ id: string }>;
 }
 
-export default async function Page({ params: { id } }: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { id } = await params;
   // const product = await getProduct(id);
   // const relatedProducts = await getRelatedProducts(id);
   // console.log(product);
