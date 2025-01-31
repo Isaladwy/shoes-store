@@ -5,14 +5,13 @@ import React from 'react';
 import Buttons from './Buttons';
 
 interface PageProps {
-  params: { id: string } | Promise<{ id: string }>;
+  params: {
+    id: string;
+  };
 }
 
 export default async function Page({ params }: PageProps) {
-  const { id } = await params;
-  // const product = await getProduct(id);
-  // const relatedProducts = await getRelatedProducts(id);
-  // console.log(product);
+  const { id } = params;
 
   // To await both functions at the same time
   const [product, relatedProducts] = await Promise.all([
