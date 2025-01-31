@@ -5,9 +5,7 @@ import React from 'react';
 import Buttons from './Buttons';
 
 interface PageProps {
-  params: {
-    id: string;
-  };
+  params: { id: string } | Promise<{ id: string }>;
 }
 
 export default async function Page({ params: { id } }: PageProps) {
