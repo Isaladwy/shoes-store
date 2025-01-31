@@ -66,7 +66,15 @@ export const useCart = create<Store>()(
             total: calculateTotal(newProducts),
           };
         }),
-      removeAllFromCart: (id) => set((state) => {}),
+      removeAllFromCart: (id) =>
+        set((state) => {
+          const newProducts = state.products.filter((p) => p._id !== id);
+          return {
+            products: newProducts,
+            length: newProducts.length,
+            total: calculateTotal(newProducts),
+          };
+        }),
     }),
     { name: 'Shoes-Store-cart' } // storage name in the localStorage
   )
