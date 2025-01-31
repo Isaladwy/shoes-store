@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 // CartProduct extends Product with an additional count property
-export type CartProduct = Product & { count: number };
+export type CartProduct = Product & { count: number; purshases };
 
 // Store interface defines the structure of the cart store
 interface Store {
@@ -12,12 +12,12 @@ interface Store {
   length: number;
   total: number;
   addToCart: (p: Product) => void;
-  removeAllFromCart: (id: string) => void;
   decProduct: (id: string) => void;
+  removeAllFromCart: (id: string) => void;
 }
 
 // Create the Zustand store with persistence
-export const useCart = create<Store>(
+export const useCart = create<Store>()(
   persist<Store>(
     (set) => ({
       products: [],
@@ -44,8 +44,21 @@ export const useCart = create<Store>(
           }
           return { products: newProducts, length: newProducts?.length };
         }),
+      decProduct: (id) =>
+        set((state) => {
+          const newProducts = [] as CartProduct[];
+          state.products.forEach((p) => {
+            if (p._id === id) {
+              if (p.count > 1) {
+                newProducts.push({ ...p, count: p.count - 1 });
+              }
+            } else {
+              newProducts.push(p);
+            }
+          });
+          return { products: newProducts, length: newProducts?.length };
+        }),
       removeAllFromCart: (id) => set((state) => {}),
-      decProduct: (id) => set((state) => {}),
     }),
     { name: 'Shoes-Store-cart' } // storage name in the localStorage
   )
