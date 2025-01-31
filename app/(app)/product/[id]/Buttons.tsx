@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/stores/Cart';
+import handlePurchase from '@/stripe/Purchase';
 import { Product } from '@/types/Product';
 import React from 'react';
 
@@ -15,7 +16,11 @@ export default function Buttons({ product }: { product: Product }) {
       >
         Add to cart
       </Button>
-      <Button size="lg" className="text-[17px] py-8 w-full">
+      <Button
+        size="lg"
+        className="text-[17px] py-8 w-full"
+        onClick={() => handlePurchase({ ...product, count: 1 })}
+      >
         Buy now
       </Button>
     </div>

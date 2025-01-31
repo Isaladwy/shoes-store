@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 // CartProduct extends Product with an additional count property
-export type CartProduct = Product & { count: number; purshases };
+export type CartProduct = Product & { count: number };
 
 // Store interface defines the structure of the cart store
 interface Store {
@@ -42,7 +42,11 @@ export const useCart = create<Store>()(
             const newProduct = { ...product, count: 1 } as CartProduct;
             newProducts = [...state.products, newProduct];
           }
-          return { products: newProducts, length: newProducts?.length };
+          return {
+            products: newProducts,
+            length: newProducts?.length,
+            total: calculateTotal(newProducts),
+          };
         }),
       decProduct: (id) =>
         set((state) => {
@@ -56,10 +60,22 @@ export const useCart = create<Store>()(
               newProducts.push(p);
             }
           });
-          return { products: newProducts, length: newProducts?.length };
+          return {
+            products: newProducts,
+            length: newProducts?.length,
+            total: calculateTotal(newProducts),
+          };
         }),
       removeAllFromCart: (id) => set((state) => {}),
     }),
     { name: 'Shoes-Store-cart' } // storage name in the localStorage
   )
 );
+
+function calculateTotal(products: CartProduct[]) {
+  let total = 0;
+  products.forEach((product) => {
+    total = total + product.count * product.price;
+  });
+  return total;
+}
