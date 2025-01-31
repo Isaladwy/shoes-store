@@ -4,11 +4,13 @@ import Image from 'next/image';
 import React from 'react';
 import Buttons from './Buttons';
 
-export default async function Page({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function Page({ params: { id } }: PageProps) {
   // const product = await getProduct(id);
   // const relatedProducts = await getRelatedProducts(id);
   // console.log(product);
@@ -42,7 +44,7 @@ export default async function Page({
           >
             {product.price}$
           </span>
-          <Buttons product={product}/>
+          <Buttons product={product} />
         </div>
         <div className="border-t border-zinc-200">
           <ProductCarousel relatedProducts={relatedProducts} />
