@@ -2,8 +2,10 @@ import { Product } from '@/types/Product';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+// CartProduct extends Product with an additional count property
 export type CartProduct = Product & { count: number };
 
+// Store interface defines the structure of the cart store
 interface Store {
   // define the properties of Store
   products: CartProduct[];
@@ -14,6 +16,7 @@ interface Store {
   decProduct: (id: string) => void;
 }
 
+// Create the Zustand store with persistence
 export const useCart = create<Store>(
   persist<Store>(
     (set) => ({
@@ -44,6 +47,6 @@ export const useCart = create<Store>(
       removeAllFromCart: (id) => set((state) => {}),
       decProduct: (id) => set((state) => {}),
     }),
-    { name: 'Shoes-Store-cart' }
+    { name: 'Shoes-Store-cart' } // storage name in the localStorage
   )
 );
