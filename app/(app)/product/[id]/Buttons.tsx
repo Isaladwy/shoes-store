@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/stores/Cart';
-import handlePurchase from '@/stripe/Purchase';
+import handlePurchase from '@/services/stripe/Purchase';
 import { Product } from '@/types/Product';
 import React from 'react';
 

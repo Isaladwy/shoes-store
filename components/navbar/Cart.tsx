@@ -6,7 +6,7 @@ import { useCart } from '@/stores/Cart';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '../ui/button';
-import handlePurchase from '@/stripe/Purchase';
+import handlePurchase from '@/services/stripe/Purchase';
 
 export default function Cart() {
   const { length, products, decProduct, total } = useCart();
@@ -48,12 +48,11 @@ export default function Cart() {
             </Link>
           ))}
         </div>
-        <div className='flex flex-col'
-        >
-          <span className='font-semibold'>
-            Total: {total}$
-          </span>
-          <Button size='lg' onClick={()=> handlePurchase(products)}>Continue</Button>
+        <div className="flex flex-col">
+          <span className="font-semibold">Total: {total}$</span>
+          <Button size="lg" onClick={() => handlePurchase(products)}>
+            Continue
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
