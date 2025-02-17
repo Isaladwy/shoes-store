@@ -9,7 +9,7 @@ export default async function Page() {
   return (
     <div className="flex md:flex-row flex-col py-12 w-full">
       <div className="border-r md:w-[400px] w-full">
-        <Filters />
+        <Filters products={products}  />
       </div>
       <div className="space-y-2 md:p-12 w-full">
         <span className="font-semibold text-zinc-500 text-sm">
