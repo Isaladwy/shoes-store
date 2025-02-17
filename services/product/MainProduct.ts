@@ -12,9 +12,7 @@ export default async function getMainProduct() {
 
 export async function getLatestProducts() {
   const query = `*[_type=="product"][0...6]|order(_createdAt_desc)`;
-
   const products = (await sanity.fetch(query)) as [];
-
   return products.map((product) => prepareProduct(product));
 }
 
@@ -26,6 +24,12 @@ export async function getProduct(id: string) {
 
 export async function getRelatedProducts(id: string) {
   const query = `*[_type=="product" && id!="${id}"]`;
+  const products = (await sanity.fetch(query)) as [];
+  return products.map((product) => prepareProduct(product));
+}
+
+export async function getProducts() {
+  const query = `*[_type=="product"]`;
   const products = (await sanity.fetch(query)) as [];
   return products.map((product) => prepareProduct(product));
 }
