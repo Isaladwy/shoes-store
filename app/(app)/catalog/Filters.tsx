@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Slider } from '@/components/ui/slider';
 import { Product } from '@/types/Product';
 import React, { useMemo } from 'react';
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function Filters({ products, setProducts }: Props) {
-  const colors = useMemo(()=>products.map(p=>p.color), [products])
+  const colors = useMemo(() => products.map((p) => p.color), [products]);
   return (
     <div className="flex flex-col gap-6 px-6 py-10">
       <div className="space-y-2">
@@ -27,9 +27,22 @@ export default function Filters({ products, setProducts }: Props) {
           <span>100$</span>
         </div>
       </div>
-      <div className='space-y-2'>
-        <span className='font-semibold text-zinc-500 text-sm'>Colors</span>
-        <div className='flex gap-2'></div>
+      <div className="space-y-2">
+        <span className="font-semibold text-zinc-500 text-sm">Colors</span>
+        <div className="flex flex-wrap gap-2">
+          {colors.map((color) => (
+            <div
+              key={color}
+              onClick={() => {}}
+              className="transition-all w-[50px] p-1 text-zinc-600"
+            >
+              <div
+                className="w-full h-full aspect-square"
+                style={{ background: color }}
+              ></div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
