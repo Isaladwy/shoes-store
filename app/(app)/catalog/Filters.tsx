@@ -1,7 +1,7 @@
 'use client';
 import { Slider } from '@/components/ui/slider';
 import { Product } from '@/types/Product';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 type Props = {
   products: Product[];
@@ -42,6 +42,19 @@ export default function Filters({ products, setProducts }: Props) {
 
   const isColorSelected = (color: string) =>
     selectedColors.some((c) => c === color);
+
+  useEffect(() => {
+    let filteredProducts = products;
+    // colors
+    filteredProducts =
+      selectedColors.length === 0
+        ? products
+        : filteredProducts.filter((p) => selectedColors.includes(p.color));
+
+    // price
+    filteredProducts = filteredProducts.filter((p) => p.price >= minPrice);
+    setProducts(filteredProducts);
+  }, [minPrice, selectedColors]);
   return (
     <div className="flex flex-col gap-6 px-6 py-10">
       <div className="space-y-2">
@@ -59,7 +72,7 @@ export default function Filters({ products, setProducts }: Props) {
             }}
           />
           <span>{max}$</span>
-        </div> 
+        </div>
       </div>
       <div className="space-y-2">
         <span className="font-semibold text-zinc-500 text-sm">Colors</span>
