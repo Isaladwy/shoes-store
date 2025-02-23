@@ -4,7 +4,7 @@ import * as jose from 'jose';
 import { Admin, handleAdmin } from './services/admin/Admin';
 const sKey = process.env.NEXT_PUBLIC_JWT_SECRET_KEY || '';
 
-export async function middelware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/admin')) {
     const token = (await cookies()).get('admin_token')?.value || '';
     if (!token) return NextResponse.redirect(new URL('/login', request.url));
