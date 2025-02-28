@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 const sKey = process.env.NEXT_PUBLIC_JWT_SECRET_KEY || '';
 
-export type Admin = { email: string; password: string };
+export type Admin = { email: string, password: string };
 
 export async function handleLogin(admin: Admin) {
   const token = jwt.sign(admin, sKey);
