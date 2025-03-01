@@ -8,8 +8,8 @@ export default async function Page() {
   console.log(bestSellingProducts);
   return (
     <div className="flex flex-col gap-8 p-12 pt-20">
-      <Stats />
-      <Chart />
+      <Stats /> 
+      <Chart products={bestSellingProducts} />
     </div>
   );
 }

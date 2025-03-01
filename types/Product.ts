@@ -6,7 +6,7 @@
  * @property {number} price - The price of the product.
  * @property {string} image - The URL of the product's image.
  * @property {string} color - The color of the product.
- * @property {number} purchaces - The number of times the product has been purchased.
+ * @property {number} purchases - The number of times the product has been purchased.
  */
 export type Product = {
   _id: string;
@@ -14,5 +14,5 @@ export type Product = {
   price: number;
   image: string;
   color: string;
-  purchaces: number;
+  purchases: number;
 };
