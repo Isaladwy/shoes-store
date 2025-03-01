@@ -9,21 +9,29 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { Product } from '@/types/Product';
 
-export default function Chart({ products }: { products: Product[] }) {
+const chartConfig = {
+  views: {
+    label: 'Page Views',
+  },
+  purchases: {
+    label: 'Purchases',
+    color: 'hsl(var(--chart-1))',
+  },
+};
 
+export default function Chart({ products }: { products: Product[] }) {
   const data = useMemo(() => {
     return products.map((pr) => ({
       product: pr.title,
       purchases: pr.purchases || 0,
     }));
-  },[products]);
+  }, [products]);
 
   const total = useMemo(() => {
     return data.reduce((acc, curr) => acc + curr.purchases, 0);
@@ -47,6 +55,36 @@ export default function Chart({ products }: { products: Product[] }) {
           </button>
         </div>
       </CardHeader>
+      <CardContent className="px-2 sm:p-6">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-[250px] w-full"
+        >
+          <LineChart
+            accessibilityLayer
+            data={data}
+            margin={{ left: 12, right: 12 }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="product"
+              tickLine={true}
+              axisLine={true}
+              tickMargin={8}
+              minTickGap={32}
+            />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  className="w-[150px]"
+                  nameKey="purchases"
+                />
+              }
+            />
+            <Line dataKey="purchases" stroke="#FF0000" strokeWidth={2} />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
     </Card>
   );
 }
