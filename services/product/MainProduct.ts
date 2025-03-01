@@ -4,6 +4,7 @@ import { Product } from '@/types/Product';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { CartProduct } from '@/stores/Cart';
+import { revalidatePath } from 'next/cache';
 
 const sKey = process.env.NEXT_PUBLIC_JWT_SECRET_KEY || '';
 
@@ -53,6 +54,8 @@ export async function updatePurchase() {
         .commit()
     )
   );
+  revalidatePath('/admin');
+  (await cookies()).delete('purchase_products');
 }
 
 function prepareProduct(product: Product) {
