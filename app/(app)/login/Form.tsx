@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { handleLogin } from '@/services/admin/Admin';
-import { redirect } from 'next/navigation';
 import React from 'react';
 
 export default function Form() {
@@ -13,7 +12,6 @@ export default function Form() {
     const password = form.get('password');
     if (!email || !password) return;
     await handleLogin({ email: email as string, password: password as string });
-    redirect('/admin');
   };
   return (
     <form action={login} className="flex flex-col gap-3 justify-center p-20">
