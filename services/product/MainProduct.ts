@@ -2,8 +2,6 @@ import { urlFor } from '@/sanity/lib/image';
 import { sanity } from '@/sanity/lib/sanity';
 import { Product } from '@/types/Product';
 
-
-
 export default async function getMainProduct() {
   const query = `*[_type=='main_product'][0]{product->}`;
 
@@ -36,7 +34,14 @@ export async function getProducts() {
   return products.map((product) => prepareProduct(product));
 }
 
-
+export async function getBestSellingProducts() {
+  const query = `*[_type=="product"]{
+  ...,
+  "purchases": coalesce(purchases, 0)
+  } | order(purchases desc)`;
+  const products = (await sanity.fetch(query)) as [];
+  return products.map((p) => prepareProduct(p));
+}
 
 function prepareProduct(product: Product) {
   return { ...product, image: urlFor(product.image).url() } as Product;
