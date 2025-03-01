@@ -1,16 +1,21 @@
 import { Product } from '@/types/Product';
+import { Divide } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { TbShoppingBagPlus } from 'react-icons/tb';
+import { GoArrowUpRight, GoArrowDownRight } from 'react-icons/go';
 
 type Props = {
   product: Product;
   small?: boolean;
+  averagePurchases?: number;
 };
 
 export default function ProductCard(props: Props) {
-  const { product, small } = props;
+  const { product, small, averagePurchases } = props;
+  const admin = !!averagePurchases;
+  const isAboveAverage = product.purchases > (averagePurchases || 0);
   return (
     <Link href={`/product/${product._id}`} className="space-y-3 group">
       <div
@@ -24,6 +29,25 @@ export default function ProductCard(props: Props) {
           className="object-contain p-10 group-hover:opacity-65 transition-all"
         />
       </div>
+      {admin ? (
+        <div className="flex items-center gap-1.5 border-b pb-3 border-b-zinc-200">
+          <div className="flex items-center gap-1">
+            {isAboveAverage ? (
+              <div className="flex items-center gap-1.5">
+                <div className="w-4 h-4 rounded bg-green-500">
+                  <GoArrowUpRight />
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1.5">
+                <div className="w-4 h-4 rounded bg-red-500">
+                  <GoArrowDownRight />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : null}
       <p className="font-bold text-primary/80">{product.title}</p>
       <p>{product.price}$</p>
     </Link>
