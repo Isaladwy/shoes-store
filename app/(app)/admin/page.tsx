@@ -1,6 +1,7 @@
 import { getBestSellingProducts } from '@/services/product/MainProduct';
 import React from 'react';
 import Stats from './Stats';
+import Chart from './Chart';
 
 export default async function Page() {
   const bestSellingProducts = await getBestSellingProducts();
@@ -8,6 +9,8 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-8 p-12 pt-20">
       <Stats />
+      <Chart />
     </div>
   );
 }
+ 
