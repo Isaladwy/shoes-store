@@ -17,8 +17,8 @@ export async function updatePurchase() {
     products.map((product) =>
       sanity
         .patch(product._id)
-        .setIfMissing({ purchase: 0 })
-        .inc({ purchase: product.count })
+        .setIfMissing({ purchases: 0 })
+        .inc({ purchases: product.count })
         .commit()
     )
   );
