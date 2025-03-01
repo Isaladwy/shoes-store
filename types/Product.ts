@@ -15,4 +15,6 @@ export type Product = {
   image: string;
   color: string;
   purchases: number;
+  count?: number; // Add the count property as optional
+
 };
