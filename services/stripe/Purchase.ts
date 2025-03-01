@@ -24,7 +24,7 @@ async function handlePurchase(items: CartProduct[] | CartProduct) {
   const token = await jwt.sign({ products }, sKey);
   (await cookies()).set('purchase_products', token);
   
- 
+
 
   const session = await stripe.checkout.sessions.create({
     line_items,
