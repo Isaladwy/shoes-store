@@ -14,6 +14,7 @@ interface Store {
   addToCart: (p: Product) => void;
   decProduct: (id: string) => void;
   removeAllFromCart: (id: string) => void;
+  clearCart: () => void; // New function to clear the entire cart
 }
 
 // Create the Zustand store with persistence
@@ -75,6 +76,14 @@ export const useCart = create<Store>()(
             total: calculateTotal(newProducts),
           };
         }),
+      
+      // New function to clear the entire cart
+      clearCart: () =>
+        set(() => ({
+          products: [],
+          length: 0,
+          total: 0,
+        })),
     }),
     { name: 'Shoes-Store-cart' } // storage name in the localStorage
   )

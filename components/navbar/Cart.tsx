@@ -9,7 +9,7 @@ import { Button } from '../ui/button';
 import handlePurchase from '@/services/stripe/Purchase';
 
 export default function Cart() {
-  const { length, products, decProduct, total } = useCart();
+  const { length, products, decProduct, total, clearCart } = useCart();
   return (
     <Sheet>
       <SheetTrigger>
@@ -48,7 +48,7 @@ export default function Cart() {
             </Link>
           ))}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
           <span className="font-semibold">Total: {total}$</span>
           <Button
             size="lg"
@@ -56,6 +56,16 @@ export default function Cart() {
           >
             Continue
           </Button>
+          {products.length > 0 && (
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => clearCart()}
+              className="border-red-500 text-red-500 hover:bg-red-50"
+            >
+              Clear Cart
+            </Button>
+          )}
         </div>
       </SheetContent>
     </Sheet>
