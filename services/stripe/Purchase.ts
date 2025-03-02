@@ -7,7 +7,10 @@ import { cookies } from 'next/headers';
 
 const sKey = process.env.NEXT_PUBLIC_JWT_SECRET_KEY || '';
 
-async function handlePurchase(items: CartProduct[] | CartProduct) {
+async function handlePurchase(
+  items: CartProduct[] | CartProduct,
+  origin: string
+) {
   const products = Array.isArray(items) ? items : [items];
   const line_items = products.map((product) => ({
     quantity: product.count,
@@ -23,14 +26,12 @@ async function handlePurchase(items: CartProduct[] | CartProduct) {
 
   const token = await jwt.sign({ products }, sKey);
   (await cookies()).set('purchase_products', token);
-  
-
 
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: 'payment',
-    success_url: 'http://localhost:3000/success',
-    cancel_url: 'http://localhost:3000',
+    success_url: `${origin}/success`,
+    cancel_url: `${origin}`,
   });
   if (!session.url) return;
   redirect(session.url);

@@ -50,7 +50,10 @@ export default function Cart() {
         </div>
         <div className="flex flex-col">
           <span className="font-semibold">Total: {total}$</span>
-          <Button size="lg" onClick={() => handlePurchase(products)}>
+          <Button
+            size="lg"
+            onClick={() => handlePurchase(products, location.origin)}
+          >
             Continue
           </Button>
         </div>

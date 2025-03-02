@@ -19,7 +19,9 @@ export default function Buttons({ product }: { product: Product }) {
       <Button
         size="lg"
         className="text-[17px] py-8 w-full"
-        onClick={() => handlePurchase({ ...product, count: 1 })}
+        onClick={() =>
+          handlePurchase({ ...product, count: 1 }, location.origin)
+        }
       >
         Buy now
       </Button>
