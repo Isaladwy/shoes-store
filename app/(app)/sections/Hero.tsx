@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import getMainProduct from '@/services/product/MainProduct';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { IoArrowForward } from 'react-icons/io5';
 
@@ -36,10 +37,12 @@ export default async function Hero() {
               {mainProduct.price}$
             </span>
           </p>
-          <Button size="lg" className="w-fit flex items-center gap-2">
-            <span>Buy now</span>
-            <IoArrowForward />
-          </Button>
+          <Link href={`/product/${mainProduct._id}`}>
+            <Button size="lg" className="w-fit flex items-center gap-2">
+              <span>Buy now</span>
+              <IoArrowForward />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
